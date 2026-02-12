@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Students</title>
+</head>
+<body>
+<form th:action="@{/students}">
+    <label for="firstname">Firstname:
+        <input id="firstname" type="text" name="firstname" th:value="${filter.firstname()}">
+    </label>
+    <label for="surname">Surname:
+        <input id="surname" type="text" name="surname" th:value="${filter.surname()}">
+    </label>
+    <label for="birthdate">Birthdate:
+        <input id="birthdate" type="date" name="birthdate" th:value="${filter.birthdate()}">
+    </label>
+    <label for="course">Course:</label>
+    <select name="course" id="course">
+        <option value="">Not selected</option>
+        <option th:each="course : ${courses}"
+                th:value="${course.getName()}"
+                th:text="${course.getName()}"
+                th:selected="${selectedCourse.equals(course.getName())}">
+        </option>
+    </select>
+    <div>
+        <label for="page">Page:
+            <input id="page" type="number" name="page" th:value="${students.number}">
+        </label>
+        <label for="size">Size:
+            <input id="size" type="number" name="size" th:value="${students.size}">
+        </label>
+    </div>
+
+    <button type="submit">Filter</button>
+</form>
+<div th:each="student : ${students.content}">
+    <a th:href="@{'/students/' + ${student.id}}" th:text="|${student.id}. ${student.surname}|">Student</a>
+</div><br>
+<a th:href="@{/students/add}">Add student</a>
+</body>
+</html>

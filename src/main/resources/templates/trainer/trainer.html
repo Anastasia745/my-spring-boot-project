@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Trainers</title>
+</head>
+<body>
+<form th:action="@{/trainers/{trainerId}/update(trainerId=${trainer.id})}" method="post">
+    <label for="firstname">Firstname:
+        <input id="firstname" type="text" name="firstname" th:value="${trainer.firstname}">
+    </label><br/>
+    <label for="secondname">Secondname:
+        <input id="secondname" type="text" name="secondname" th:value="${trainer.secondname}">
+    </label><br/>
+
+    <label for="courses">Courses:</label>
+    <div id="courses" th:each="course : ${courses}">
+        <input type="checkbox" name="courseIds"
+               th:value="${course.id}"
+               th:checked="${#lists.contains(trainerCourses, course)}"/>
+        <span th:text="${course.name}"/>
+        <br/>
+    </div>
+    <button type="submit">Update</button>
+</form>
+<form th:action="@{/trainers/{trainerId}/delete(trainerId=${trainer.id})}" method="post">
+    <button type="submit">Delete</button>
+</form>
+</body>
+</html>

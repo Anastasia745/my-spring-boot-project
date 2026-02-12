@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Trainers</title>
+</head>
+<body>
+<form th:action="@{/trainers/create}" method="post">
+    <label for="firstname">Firstname:
+        <input id="firstname" type="text" name="firstname">
+    </label><br/>
+    <label for="secondname">Secondname:
+        <input id="secondname" type="text" name="secondname">
+    </label><br/>
+
+    <label for="courses">Courses:</label>
+    <div id="courses" th:each="course : ${courses}">
+        <input type="checkbox" name="courseIds"
+               th:value="${course.id}"/>
+        <span th:text="${course.name}"/>
+        <br/>
+    </div>
+
+    <button type="submit">Create</button>
+</form>
+</body>
+</html>

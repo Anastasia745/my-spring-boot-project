@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student</title>
+</head>
+<body>
+<form th:action="@{/students/{studentId}/update(studentId=${student.id})}" enctype="multipart/form-data" method="post">
+    <label for="firstname">Firstname:
+        <input id="firstname" type="text" name="firstname" th:value="${student.name}">
+    </label>
+    <label for="surname">Surname:
+        <input id="surname" type="text" name="surname" th:value="${student.surname}">
+    </label>
+    <label for="birthdate">Birthdate:
+        <input id="birthdate" type="date" name="birthdate" th:value="${student.birthdate}">
+    </label>
+    <label for="course">Course:</label>
+    <select name="courseId" id="course">
+        <option th:each="course : ${courses}"
+                th:value="${course.id}"
+                th:text="${course.name}"
+                th:selected="${course.name.equals(student.course.name)}">
+        </option>
+    </select>
+    <button type="submit">Update</button>
+</form>
+<form th:action="@{/students/{studentId}/delete(studentId=${student.id})}" method="post">
+    <button type="submit">Delete</button>
+</form>
+</body>
+</html>

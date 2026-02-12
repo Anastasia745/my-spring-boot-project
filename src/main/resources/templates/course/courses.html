@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Courses</title>
+</head>
+<body>
+<form th:action="@{/courses}">
+    <label for="name">Name:
+        <input id="name" type="text" name="name" th:value="${filter.name()}">
+    </label><br/>
+
+    <label for="trainers">Trainers:</label>
+    <div id="trainers" th:each="trainer : ${trainers}">
+        <input type="checkbox" name="trainerId"
+               th:value="${trainer.getId()}"/>
+        <span th:text="|${trainer.firstname} ${trainer.secondname}|"/>
+        <br/>
+    </div>
+
+    <div>
+        <label for="page">Page:
+            <input id="page" type="number" name="page" th:value="${courses.number}">
+        </label>
+        <label for="size">Size:
+            <input id="size" type="number" name="size" th:value="${courses.size}">
+        </label>
+    </div>
+    <button type="submit">Filter</button>
+</form>
+<div th:each="course : ${courses.content}">
+    <a th:href="@{'/courses/' + ${course.id}}" th:text="|${course.id}. ${course.name}|">Course</a>
+</div><br>
+
+<a th:href="@{/courses/add}">Add course</a>
+</body>
+</html>

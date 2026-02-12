@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student</title>
+</head>
+<body>
+<form th:action="@{/students/create}" enctype="multipart/form-data" method="post">
+    <label for="firstname">Firstname:
+        <input id="firstname" type="text" name="firstname">
+    </label>
+    <label for="surname">Surname:
+        <input id="surname" type="text" name="surname">
+    </label>
+    <label for="birthdate">Birthdate:
+        <input id="birthdate" type="date" name="birthdate">
+    </label>
+    <label for="course">Course:</label>
+    <select name="courseId" id="course">
+        <option th:each="course : ${courses}"
+                th:value="${course.id}"
+                th:text="${course.name}">
+        </option>
+    </select>
+    <button type="submit">Create</button>
+</form>
+</body>
+</html>
